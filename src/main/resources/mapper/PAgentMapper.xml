@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hongxing.mapper.PAgentMapper">
+
+    <select id="selectUserByName" resultType="com.example.hongxing.entity.PAgentEntity">
+        select
+            AGENTID,
+            AGENTPWD,
+            AGENTNAME,
+            DEPTID,
+            ENNAME,
+            OFFICETEL,
+            LASTUPDATETIME,
+            LASTACCESS
+        from P_AGENT
+        <where>
+            1=1
+            <if test="agentId !=null and agentId != ''">
+               AND AGENTID = #{agentId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserList" resultType="com.example.hongxing.entity.PAgentEntity">
+        select
+            AGENTID,
+            AGENTNAME,
+            DEPTID,
+            ENNAME,
+            OFFICETEL,
+            LASTUPDATETIME,
+            LASTACCESS
+        from P_AGENT
+        left join ORGAN o on u.OGINDEX = o.OGINDEX
+        <where>
+            1=1
+            <if test="usId !=null and usId != ''">
+                AND u.USID = #{usId}
+            </if>
+        </where>
+    </select>
+
+</mapper>
